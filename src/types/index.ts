@@ -1,6 +1,7 @@
 export interface AuthCreditential {
     accessToken: string;
     refreshToken: string;
+    input?: object
 }
 
 export interface UserProps {
@@ -15,4 +16,22 @@ export interface UserProps {
     messages?: [] 
     createdAt?: string
     myChannel?: []
+}
+
+export interface ChannelSliceProps   {
+    status: string,
+    publicChannels: [],
+    myChannels: [],
+}
+
+
+export interface Room {
+    id: number;          
+    uuid: string;        
+    name: string;       
+    channel: object;     
+    channeluuid: string; 
+    messages   : [] 
+    private     : boolean
+    createdAt : string
 }
