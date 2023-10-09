@@ -13,8 +13,8 @@ function App() {
   }
   return (
  
- <div  className="bg-slate-50">
-          {/* <button onClick={() => handleClick()} type="button" className="bg-primary text-white rounded-md px-3 py-1 mx-3"> Logout</button> */}
+ <div  className="bg-slate-50 h-screen">
+          <button onClick={() => handleClick()} type="button" className="bg-primary text-white rounded-md px-3 py-1 mx-3"> Logout</button>
 
       <Home />
 

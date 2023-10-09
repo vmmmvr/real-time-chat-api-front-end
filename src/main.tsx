@@ -18,7 +18,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <Routes>
     
     <Route  path='/auth' element={  <Auth /> } />
-    <Route path='/' element={  
+    <Route path='/*' element={  
     <AuthRoute> 
       <App />
      </AuthRoute>

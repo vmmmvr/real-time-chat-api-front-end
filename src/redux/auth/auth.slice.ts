@@ -71,6 +71,5 @@ export const authSlice = createSlice({
     }
 })
 // reducers
-export const getUser = state => state.user;
 
 export default authSlice.reducer;
