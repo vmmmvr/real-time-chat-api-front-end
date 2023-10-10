@@ -35,3 +35,4 @@ export interface Room {
     private     : boolean
     createdAt : string
 }
+

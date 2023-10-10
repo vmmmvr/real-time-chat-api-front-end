@@ -39,7 +39,8 @@ export default function Login() {
       
             <div className="flex flex-col mb-5">
               <label className="text-gray-500 mb-1" htmlFor="email">enter your email:</label>
-              <input {...register("email", {required: true})} placeholder="Email" type="email" className="ring-1 ring-secondary text-gray-600   rounded-md px-3 py-1 focus:ring-1 focus:ring-secondary outline-0   " />
+              <input {...register("email", {required: true})} placeholder="Email" type="email" 
+              className="ring-1 ring-secondary text-gray-600   rounded-md px-3 py-1 focus:ring-1 focus:ring-secondary outline-0   " />
                 <small className="text-red-500">  {errors.email?.type === 'required' && "email is required"} </small>
             
             </div>  

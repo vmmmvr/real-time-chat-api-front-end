@@ -16,7 +16,7 @@ export default function LeftSidebar() {
 
  
   return (
-    <div className="flex-2 lg:w-1/5 w-1/6 bg-white rounded-md p-3 h-56 hidden sm:block">
+    <div className="flex-2 lg:w-1/5 w-1/6 bg-white rounded-md p-5 h-56 hidden sm:block">
 <DialogComponent toggleFunc={dialogCloser} toggle={showModal} child={<AddChannel dialogCloser={dialogCloser} />} />
       
     <div>
@@ -24,45 +24,49 @@ export default function LeftSidebar() {
        <h4 className="text-gray-500">Public Channels</h4> <button onClick={() => setshowModal(!showModal)}> <AddIcon  /></button>
       </div>
     
-      <div className="pt-5">
+      <div className="mt-2">
       {
-        publicChannels.map((channel, index) => (   <div key={channel.uuid} className="bg-white rounded-md p-2">
+        publicChannels.map((channel, index) => (   <div key={channel.uuid} className="bg-white rounded-md px-2">
         {/* room  */}
         <div
           className="flex flex-row justify-between cursor-pointer hover:bg-secondary p-2 rounded-md"
           onClick={() => setshow(!show)}
         >
             <Link to='/channels' >
-                    <h5 className="text-primary">{channel.name}</h5>
+              <div className="flex flex-row items-center">
+                <img src="/avatar.svg" className="w-5 h-5 rounded-full mx-1" alt="" />
+              <h5 className="text-gray-600 font-semibold">{channel.name}</h5>
+
+              </div>
             </Link>
         
-        <div className="flex flex-row">
-        <span className="text-xs bg-primary text-white py-1 px-2 rounded-full">
+        <div className="flex flex-row items-center">
+        <small className="text-xs text-[12px] font-semibold text-primary p-1 rounded-full">
             {
               channel.rooms.length
             }
-          </span>
+          </small>
         {show ? <ArrowRight />   :<ArrowDown />} 
         </div>
         </div>
         {
           <div
             className={
-              `flex flex-col p-2 transition ease-in-out px-5 ` +
+              `flex flex-col  transition ease-in-out px-5 ` +
               (show && `hidden`)
             }
           >
           {
-            channel.rooms.map(room => (  <div key={room.uuid} className="py-2 my-1 flex flex-row items-center justify-between  hover:bg-secondary cursor-pointer rounded-md px-2">
+            channel.rooms.map(room => (  <div key={room.uuid} className="py-0  flex flex-row items-center justify-between  hover:bg-secondary cursor-pointer rounded-md px-2">
             <Link to={`/rooms/${room.uuid}`} >
-            <span className="text-xs text-gray-500"> {room.name} </span>
+            <span className="text-xs text-gray-500 "> {room.name} </span>
             </Link>
-              <div className="flex flex-row">
-              <span className="text-xs bg-primary text-white py-1 px-2 rounded-full">
+              <div className="flex flex-row items-center">
+              <small className="text-xs text-[12px] font-semibold text-primary">
                 {
                   room.messages.length
                 }
-              </span>
+              </small>
               <ArrowRight  />
                 </div>
             

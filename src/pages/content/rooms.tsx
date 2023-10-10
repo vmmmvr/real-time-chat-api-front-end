@@ -3,10 +3,12 @@ import { SendIcon } from "../../icons";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Room } from "../../types";
+import { useForm } from "react-hook-form";
 export default function Rooms() {
   const {uuid} = useParams();
   const {publicChannels} = useSelector((state: any) => state.channel);
   const [selectedRoom, setselectedRoom] = useState<Room | null>(null)
+  const { register, formState: { errors }, handleSubmit } = useForm();
 
   useEffect(() => {
       const room = publicChannels.find(channel => channel.rooms.find(room => room.uuid === uuid)).rooms.find(room => room.uuid === uuid);
@@ -22,7 +24,7 @@ export default function Rooms() {
     <div className="flex  flex-col text-center justify-between h-full  ">
       <div className="border-b border-gray-100 py-2 flex-2">
         <h1 className="text-gray-600  font-bold">{selectedRoom?.name}</h1>
-        <small className="text-gray-400">last message 13 mins ago</small>
+        <small className="text-gray-400">last message {selectedRoom?.messages.length} mins ago</small>
       </div>
 
       <div className="messages my-5 px-3 flex-1 flex flex-col justify-end ">
@@ -42,9 +44,17 @@ export default function Rooms() {
       </div>
 
       <div className="px-3 flex-2">
-        <textarea className=" w-full text-sm text-gray-600 outline-none border border-gray-300 px-3 py-2 rounded-md" name="" placeholder="send message" id="" ></textarea>
+      <form  onSubmit={handleSubmit((data) => {})}>
+      
+
+            <textarea {...register("message", {required: true})} className=" w-full text-sm text-gray-600 outline-none border border-gray-300 px-3 py-2 rounded-md" name="" placeholder="send message" id="" ></textarea>
+            <small className="text-red-500">  {errors.name?.type === 'required' && "channel Name is required"} </small>
+            
+            <button  type="submit" className="bg-primary text-white text-sm font-semibold px-3 py-2 rounded-md flex flex-row"><span>Send</span> <SendIcon  /></button>
+        
+            {/* <button className="bg-primary px-5 py-2 text-white text-sm rounded-md">Create A Channel</button> */}
+          </form>
           <div>
-          <button className="bg-primary text-white text-sm font-semibold px-3 py-2 rounded-md flex flex-row"><span>Send</span> <SendIcon  /></button>
         
             </div> 
       </div>
