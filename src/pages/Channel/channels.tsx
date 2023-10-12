@@ -7,7 +7,7 @@ import Loading from "../components/loading";
 import { AddIcon } from "../../icons";
 import DialogComponent from "../components/dialog";
 import AddChannel from "../components/add-channel";
-import AddRoom from "./add-room";
+import AddRoom from "../Room/add-room";
 
 export default function Channels() {
   const dispatch = useDispatch();

@@ -1,9 +1,9 @@
 import {  useEffect, useState } from "react";
-import { AddIcon, ArrowDown, ArrowRight, SearchIcon } from "../../icons";
-import { Link } from "react-router-dom";
+import { AddIcon, ArrowDown, ArrowRight, SearchIcon } from "./icons";
+import { Link, useParams } from "react-router-dom";
 import { Dialog, Transition } from '@headlessui/react'
 import DialogComponent from "./dialog";
-import AddChannel from "./add-channel";
+import AddChannel from "../Channel/add-channel";
 import { useSelector } from "react-redux";
 import { OpenMenuProps } from "../../types";
 
@@ -22,84 +22,36 @@ useEffect(() => {
   }
 }, [publicChannels])
 
+
  
   return (
-    <div className="flex-2 lg:w-1/5 w-1/6 bg-white shadow-md rounded-lg px-5  hidden sm:block">
+    <div className="flex-2 lg:w-1/5 w-1/6  bg-white shadow-md rounded-lg px-5   hidden sm:block">
 <DialogComponent toggleFunc={dialogCloser} toggle={showModal} child={<AddChannel dialogCloser={dialogCloser} />} />
       
-    <div className="w-full">
-      <div className="border-b-2 py-5 border-slate-300 border-opacity-20">
-      <div className=" flex border py-1 border-slate-200 rounded-md  flex-row max-w-full justify-between">
-      <input className="focus:outline-0  max-w-[80%] rounded-md py-1 px-3" type="text" placeholder="search channels" />
-      <button><SearchIcon classes="w-5 h-5 text-gray-400 ml-2 mx-2" /></button>
-      </div>
+    <div className="w-full h-full flex flex-col">
+      <div className="border-b-2 flex-2  py-5 border-slate-300 border-opacity-20 ">
+          <div className=" flex border py-1 border-slate-200 rounded-md  flex-row max-w-full justify-between">
+          <input className="focus:outline-0  max-w-[80%] rounded-md py-1 px-3" type="text" placeholder="search channels" />
+          <button><SearchIcon classes="w-5 h-5 text-gray-400 ml-2 mx-2" /></button>
+          </div>
       </div>
      
-       <div className="flex flex-row justify-between py-5">
-       <h4 className="text-gray-400">Public Channels</h4> 
-       <button className="  bg-gray-200 w-6  h-6 text-sm   flex justify-center rounded-lg items-center hover:bg-gray-600  text-center  border" onClick={() => setshowModal(!showModal)}> <AddIcon color="text-white" /></button>
-      </div>
     
-      <div className="">
-      {
-        publicChannels.map((channel, index) => (   <div key={channel.uuid} className="bg-white rounded-md px-2">
-        {/* room  */}
-        <div
-          className="flex flex-row justify-between cursor-pointer hover:bg-secondary p-2 rounded-md"
-        >
-            <Link to={`/channels/${channel.uuid}` }>
-              <div className="flex flex-row items-center">
-                <img src="/avatar.svg" className="w-5 h-5 rounded-full mx-1" alt="" />
-              <h5 className="text-gray-500 ">{channel.name}</h5>
-
-              </div>
-            </Link>
-        
-        <div 
-          onClick={() => setshow(!show)}
-        className="flex flex-row items-center">
-        <small className="text-xs text-[12px] font-semibold text-primary p-1 rounded-full">
-            {
-              channel.rooms.length
-            }
-          </small>
-        {show ? <ArrowRight />   :<ArrowDown />} 
-        </div>
-        </div>
-        {
-          <div
-            className={
-              `flex flex-col  transition ease-in-out px-5 ` +
-              (show && `hidden`)
-            }
-          >
-          {
-            channel.rooms.map(room => (  <div key={room.uuid} className="py-0  flex flex-row items-center justify-between  hover:bg-secondary cursor-pointer rounded-md px-2">
-            <Link to={`/rooms/${room.uuid}`} >
-            <span className="text-xs text-gray-500 "> {room.name} </span>
-            </Link>
-              <div className="flex flex-row items-center">
-              <small className="text-xs text-[12px] font-semibold text-primary">
-                {
-                  room.messages.length
-                }
-              </small>
-              <ArrowRight  />
-                </div>
+      <div className="flex flex-col overflow-auto justify-between flex-1 pb-5">
+              
+          <div className="">
             
-            </div>))
-          }
+          <SideBarChannelViewer channels={publicChannels} title={"Public Channels"}  />
+
+          <SideBarChannelViewer channels={privateChannels} title={"Private Channels"}  />
 
           </div>
-        }
-      </div>))
-      }
-
-      <div></div>
- <SideBarChannelViewer channels={privateChannels} title={"Private Channels"} />
-
-
+    
       </div>
+      <button className="  bg-primary py-3 w-full relative bottom-1 my-5 text-sm   flex justify-center rounded-lg items-center  text-center  border" 
+            onClick={() => setshowModal(!showModal)}
+            > <AddIcon color="text-white" /><span className="text-white">Add A Channel</span></button>
+
     </div>
   </div>
   );
@@ -109,7 +61,8 @@ useEffect(() => {
 
 export  function SideBarChannelViewer({channels, title}: {channels: [], title: string}) {
   const [openMenuItems, setOpenMenuItems] = useState<OpenMenuProps[]>([])
- 
+   const params = useParams();
+
     function showMenuItem(uuid) {
       setOpenMenuItems((state) => {
           const item  = (state.find(item => item.itemuuid === uuid)) ;
@@ -132,65 +85,67 @@ export  function SideBarChannelViewer({channels, title}: {channels: [], title: s
     return () => {
       
     }
-  }, [channels])
+  }, [channels, params])
+
   console.log({
-    openMenuItems
+    params: params["*"]?.split("/")[1]
   });
+  
   return (
     <div>
              <div className="flex flex-row justify-between py-5">
        <h4 className="text-gray-400"> {title} </h4> 
-       <button className="  bg-gray-200 w-6  h-6 text-sm   flex justify-center rounded-lg items-center hover:bg-gray-600  text-center  border" 
-      //  onClick={() => setshowModal(!showModal)}
-       > <AddIcon color="text-white" /></button>
+   
       </div>
 {
-        channels.map((pvChannel, index) => (   <div key={pvChannel.uuid} className="bg-white rounded-md px-2">
+        channels.map((chnnl, index) => (   <div key={chnnl.uuid} className="bg-white rounded-md px-2">
         {/* room  */}
         <div
-          className="flex flex-row justify-between cursor-pointer hover:bg-secondary p-2 rounded-md"
+          className={`flex flex-row justify-between cursor-pointer ${params["*"]?.split("/")[1] === chnnl.uuid ? "bg-primary" : ""} mt-2 mb-1  p-2 rounded-md`}
         >
-            <Link to={`/channels/${pvChannel.uuid}` }>
-              <div className="flex flex-row items-center">
+            <Link to={`/channels/${chnnl.uuid}` }>
+              <div className="flex flex-row items-center text-clip">
                 <img src="/avatar.svg" className="w-5 h-5 rounded-full mx-1" alt="" />
-              <h5 className="text-gray-600 font-semibold">{pvChannel.name}</h5>
+              <span className={`  ${params["*"]?.split("/")[1] === chnnl.uuid ? "text-white" : "text-gray-600"}  truncate ...`}>{chnnl.name}</span>
 
               </div>
             </Link>
         
         <div 
-          onClick={() => showMenuItem(pvChannel.uuid)
+          onClick={() => showMenuItem(chnnl.uuid)
           }
-        className="flex flex-row items-center">
-        <small className="text-xs text-[12px] font-semibold text-primary p-1 rounded-full">
+        className="flex flex-row items-center pr-2">
+        {/* <small className="text-xs text-[12px] font-semibold text-gray-300 p-1 rounded-full">
             {
-              pvChannel.rooms.length
+              chnnl.rooms.length
             }
-          </small>
-        {openMenuItems?.find(item => item.itemuuid === pvChannel.uuid) ? <ArrowRight />   :<ArrowDown />} 
+          </small> */}
+        {openMenuItems?.find(item => item.itemuuid === chnnl.uuid)?.isOpen === true ? <ArrowRight />   :<ArrowDown />} 
         </div>
         </div>
         {
           <div
             className={
               `flex flex-col  transition ease-in-out px-5 ` +
-              (openMenuItems?.find(item => item.itemuuid === pvChannel.uuid)?.isOpen === false && `hidden`)
+              (openMenuItems?.find(item => item.itemuuid === chnnl.uuid)?.isOpen === false && `hidden`)
             }
           >
           {
-            pvChannel.rooms.map(room => (  <div key={room.uuid} className="py-0  flex flex-row items-center justify-between  hover:bg-secondary cursor-pointer rounded-md px-2">
+            chnnl.rooms.map(room => (  <div key={room.uuid} className={`py-1 
+             cursor-pointer rounded-md px-2   ${params["*"]?.split("/")[1] === room.uuid ? " bg-primary" : "hover:bg-secondary"} `}>
             <Link to={`/rooms/${room.uuid}`} >
-            <span className="text-xs text-gray-500 "> {room.name} </span>
-            </Link>
-              <div className="flex flex-row items-center">
-              <small className="text-xs text-[12px] font-semibold text-primary">
-                {
-                  room.messages.length
-                }
-              </small>
-              <ArrowRight  />
-                </div>
             
+              <div className="flex flex-row  justify-between items-center w-full">
+                <span className={`text-sm px-1 py-2 rounded-lg  ${params["*"]?.split("/")[1] === room.uuid ? "text-white" : "text-gray-500"}   `}> {room.name} </span>
+
+                <small className="text-xs text-[12px] font-semibold text-primary">
+                  {
+                    room.messages.length
+                  }
+                </small>
+                    {/* <ArrowRight  /> */}
+                </div>
+                </Link>
             </div>))
           }
 

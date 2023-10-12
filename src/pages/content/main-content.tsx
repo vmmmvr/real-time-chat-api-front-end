@@ -1,7 +1,7 @@
 import {useParams} from "react-router-dom";
 import {  Routes, Route} from "react-router-dom";
-import Channels from './channels';
-import Rooms from './rooms';
+import Channels from '../Channel/channels';
+import Rooms from '../Room/rooms';
 
 export default function MainContent() {
 
