@@ -51,7 +51,10 @@ export const authSlice = createSlice({
           
         }).
         addCase(getUserThunk.rejected, (state,action) => {
-          state.status = "failed";
+          state.status = "failed";  
+     
+          
+          state.error = action?.payload.errorMessage.error
         })
 
         // logout

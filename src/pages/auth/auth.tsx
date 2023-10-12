@@ -2,13 +2,13 @@ import { useEffect } from 'react'
 import Login from './login'
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserThunk } from '../../redux/auth/auth.thunk';
-import { Navigate } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { AnyAction } from 'redux';
+import Loading from '../components/loading';
+import Register from './register';
+import ErrorMessage from '../components/error';
 
 export default function Auth() {
-  const dispatch = useDispatch();
-  const accessToken = useSelector((state: any) => state.auth.accessToken);
-  const refreshToken = useSelector((state: any) => state.auth.refreshToken);
 
 
   const user = useSelector((state: any) => state.auth.user);
@@ -21,16 +21,23 @@ if(user) {
 
 
 
-
   return (
    <div className='w-full bg-slate-50 h-screen'>
+        <ErrorMessage  />
     {
       status === "loading"  ?
         <div className='w-full h-full flex justify-center items-center'>
-           <h1>LOADING...</h1> 
+           <Loading /> 
         </div>
       
-      :    <Login />  }
+      : 
+       ( <Routes>
+      <Route path='/login' element={ <Login /> } />
+      <Route path='/register' element={   <Register />  } />
+    </Routes> )
+      
+      
+      }
      
    </div>
   )
