@@ -45,13 +45,13 @@ export default function Rooms() {
   }, [publicChannels, messageStatus, uuid]);
 
   return (
-    <div className="flex  flex-col text-center justify-between h-full  ">
+    <div className="flex  flex-col text-center justify-between h-full w-full  ">
       {roomLoadingStatus === "loading" ? (
         <div className=" w-full flex justify-center items-center h-full">
           <Loading />
         </div>
       ) : (
-        <>
+        <div className="w-full h-full flex flex-col justify-between py-5">
           <div className="border-b border-gray-100 py-2 flex-2">
             <h1 className="text-gray-600  font-bold">{room?.name}</h1>
             <small className="text-gray-400">
@@ -60,20 +60,41 @@ export default function Rooms() {
               mins ago
             </small>
           </div>
-          <div className="messages my-5 px-3 flex-1 flex flex-col justify-end ">
-            <div className="flex flex-col my-2 text-start items-start border-b pb-3 border-slate-50">
+            <div className="flex flex-col my-2 w-full px-5  overflow-auto text-start items-end border-b pb-3 border-slate-50">
              {
                 room?.messages.map((msg) => (
+                msg.sender.uuid === user.uuid ? 
+                <div className="flex w-full items-start justify-end">
+                  <div className="my-2 flex flex-row   ">
+                  
+                  <div className="mx-2 flex  flex-col items-start text-gray-500">
+                      <div key={msg.uuid} className="flex flex-col text-end" >
+                       
+                          <div className="mb-2">
+                            <small className="font-thin mx-2 text-gray-400">{new Date(msg.createdAt).toLocaleTimeString()}</small>
+                            <span className="font-bold text-sm">
+                              {msg.sender.name}
+                            </span>{" "}
+                          </div>
+                          <span className="text-sm bg-slate-50 p-2 rounded-md">
+                            {msg.message}
+                          </span>
+                      </div>
+                  </div>
+                  <img className="w-7 rounded-full" src="/avatar.svg" alt="pfp" />
+               </div>
+                </div>
                 
-               <div className="my-2 flex flex-row ">
+                :
+               <div className="my-2 flex flex-row w-full items-start">
                 <img className="w-7 rounded-full" src="/avatar.svg" alt="pfp" />
               <div className="mx-2 flex  flex-col items-start text-gray-500">
-                  <div key={msg.uuid}>
+                  <div key={msg.uuid} className="flex flex-col text-start">
                     <div className="mb-2">
                       <span className="font-bold text-sm">
                         {msg.sender.name}
                       </span>{" "}
-                      <small className="font-thin">{msg.createdAt}</small>
+                      <small className="font-thin mx-2 text-gray-400">{new Date(msg.createdAt).toLocaleTimeString()}</small>
                     </div>
 
                     <span className="text-sm bg-slate-50 p-2 rounded-md">
@@ -87,9 +108,8 @@ export default function Rooms() {
 
              } 
             </div>
-          </div>
 
-          <div className="px-3 flex-2">
+          <div className="px-3 relative flex-2">
             <form
               onSubmit={handleSubmit((data) => {
                 console.log({
@@ -133,7 +153,7 @@ export default function Rooms() {
             </form>
             <div></div>
           </div>
-        </>
+        </div>
       )}
     </div>
   );
