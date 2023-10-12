@@ -7,15 +7,21 @@ import Rooms from './content/rooms'
 import MainContent from './content/main-content'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { loadPublicChannelsThunk } from '../redux/channel/channel.thunk'
+import { loadPrivateChannelsThunk, loadPublicChannelsThunk } from '../redux/channel/channel.thunk'
 import { AnyAction } from 'redux'
 
 export default function Home()  {
   const dispatch = useDispatch();
-  
+  const {publicChannels} = useSelector((state: any) => state.channel);
+
+  const {accessToken, refreshToken} = useSelector((state: any) => state.auth);
 
   useEffect(() => {
-    dispatch(loadPublicChannelsThunk() as unknown as AnyAction)
+    Promise.resolve(dispatch(loadPublicChannelsThunk() as unknown as AnyAction)).then(() => 
+    dispatch(loadPrivateChannelsThunk({accessToken, refreshToken}) as unknown as AnyAction)
+    )
+    
+    
   
     return () => {
       

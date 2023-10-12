@@ -37,7 +37,7 @@ export default function AuthRoute({
         if(status === "loading") {
           return <><h1> LOADING...</h1></>
         }
-          return <Navigate to="/auth" />; 
+          return <Navigate to="/auth/login" />; 
     }
 
   return (

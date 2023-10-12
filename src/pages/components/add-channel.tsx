@@ -27,7 +27,7 @@ export default function AddChannel({dialogCloser}: {dialogCloser: Function}) {
             private: enabled,
             useruuid: user.uuid
         },accessToken, refreshToken}) as unknown as AnyAction)
-        
+        dialogCloser()
     })}>
       
             <div className="flex flex-col mb-5">

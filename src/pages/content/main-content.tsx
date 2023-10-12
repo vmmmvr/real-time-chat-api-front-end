@@ -11,7 +11,7 @@ export default function MainContent() {
   return (
       <Routes>
         <Route path='/rooms/:uuid' element={ <Rooms /> } />
-        <Route path='/channels/*' element={ <Channels /> } />
+        <Route path='/channels/:uuid' element={ <Channels /> } />
       </Routes>
      
   )
