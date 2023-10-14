@@ -7,11 +7,12 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        'nunito': ['nunito', 'sans-serif'],
-        'MyFont': ['"My Font"', 'serif'] // Ensure fonts with spaces have " " surrounding it.
+        'Cairo': ['Cairo', 'sans-serif'],
+        'Open Sans': ['"Open Sans"', 'sans-serif'] // Ensure fonts with spaces have " " surrounding it.
       },
       colors: {
         primary: "#6d28d9",
+        "primary-hover": "#8b5cf6",
         secondary: "#ede9fe",
       }
     },

@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { SendIcon } from "../../icons";
+import { SendIcon } from "../components/icons";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Room } from "../../types";
