@@ -7,6 +7,9 @@ import { AnyAction } from "redux";
 import Loading from "../components/loading";
 import ErrorMessage from "../components/error";
 import girlsvg from "../../assets/Girl-Workplace.svg";
+import { BiMessageSquareDots, BiSolidCheckSquare } from "react-icons/bi";
+import { Logo } from "../components/icons";
+
 
 export default function Login() {
   const {
@@ -36,9 +39,7 @@ export default function Login() {
       ) : (
         <div className="flex flex-col w-full items-center sm:flex-row h-full">
           <div className=" mx-3  px-5 py-7 rounded-lg bg-white h-full items-center  justify-between w-full sm:w-[40%]  flex flex-col">
-              <div>
-                <span className="text-primary font-semibold">Chat IO</span>
-              </div>
+          <Logo title="Chat IO" classes="font-semibold" size={40} />
               <div className="flex flex-col max-w-sm">
                   <p className="my-3 font-semibold">Login</p> 
                   <p  className="my-5 text-gray-700"> with your Data that you entered during your  
@@ -130,3 +131,5 @@ export default function Login() {
     </div>
   );
 }
+
+
