@@ -1,3 +1,13 @@
+import { BiMessageSquareDots } from "react-icons/bi"
+
+export  function Logo({title, size, classes}:{ title?: string ,size: number, classes?: string}) {
+  return (
+    <div className="flex flex-row items-center justify-center my-2">
+              <BiMessageSquareDots size={size} className="mx-2 text-primary" />  <span className={`text-primary ${classes}`}>{title}  </span> 
+
+    </div>
+  )
+}
 
 
   

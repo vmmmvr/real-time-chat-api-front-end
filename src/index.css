@@ -6,10 +6,18 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Manrope", sans-serif;
   }
 
 
   html {
-        font-family: Cairo !important;
+      font-family: 'Cairo', sans-serif !important;
+      font-family: 'Open Sans', sans-serif !important;
+  }
+
+  .input-style {
+      @apply ring-1  ring-primary text-gray-950 font-normal  bg-white rounded-sm px-3 py-2  outline-0  
+  }
+
+  .button-style {
+      @apply bg-primary w-full px-5 py-3 text-white  hover:bg-primary-hover rounded-lg
   }

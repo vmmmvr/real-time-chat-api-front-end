@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { loadPrivateChannelsThunk, loadPublicChannelsThunk } from '../../redux/channel/channel.thunk'
 import { AnyAction } from 'redux'
+import MainMenuBar from '../components/main-menu-bar'
 
 export default function Home()  {
   const dispatch = useDispatch();
@@ -31,15 +32,20 @@ export default function Home()  {
 
   
   return (
-    <div className='h-full'>
-      <Navbar />
+    <div className='h-full flex flex-row w-full justify-end'>
+        <MainMenuBar />
+
+      <div className='w-full'>
+      {/* <Navbar /> */}
         <div className='px-5 py-5 flex w-full justify-between h-[92vh]'>
-            <LeftSidebar />
+        <LeftSidebar />
+            
                 <div className='flex-1 bg-white mx-5 '>
                   <MainContent />
                 </div>
             <RightSidebar />
         </div>
+      </div>
 
     </div>
   )

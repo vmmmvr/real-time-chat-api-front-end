@@ -4,9 +4,9 @@ import { useParams } from "react-router-dom";
 import { AnyAction } from "redux";
 import { getAchannelThunk } from "../../redux/channel/channel.thunk";
 import Loading from "../components/loading";
-import { AddIcon } from "../../icons";
+import { AddIcon } from "../components/icons";
 import DialogComponent from "../components/dialog";
-import AddChannel from "../components/add-channel";
+import AddChannel from "./add-channel";
 import AddRoom from "../Room/add-room";
 
 export default function Channels() {
