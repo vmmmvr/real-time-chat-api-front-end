@@ -35,7 +35,8 @@ export const authSlice = createSlice({
         })
         .addCase(loginThunk.rejected, (state, action : any) => {
           state.status = "failed";
-          state.error =  action.payload.errorMessage ?? "";
+          
+          state.error = action.payload && action?.payload?.errorMessage ;
       
           
         })
@@ -50,11 +51,11 @@ export const authSlice = createSlice({
           state.user = action.payload
           
         }).
-        addCase(getUserThunk.rejected, (state,action) => {
+        addCase(getUserThunk.rejected, (state,action: any) => {
           state.status = "failed";  
      
           
-          state.error = action?.payload.errorMessage.error
+          state.error = action.payload && action?.payload['errorMessage']["error"] 
         })
 
         // logout

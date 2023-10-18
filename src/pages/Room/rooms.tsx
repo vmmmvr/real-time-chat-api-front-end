@@ -1,8 +1,7 @@
 import { useSelector } from "react-redux";
 import { SendIcon } from "../components/icons";
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { Room } from "../../types";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { AnyAction } from "redux";
@@ -36,7 +35,7 @@ export default function Rooms() {
   useEffect(() => {
     dispatch(
       getRoomDataThunk({
-        roomuuid: uuid ,
+        roomuuid: uuid ?? "",
         accessToken,
         refreshToken,
       }) as unknown as AnyAction

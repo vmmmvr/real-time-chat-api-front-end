@@ -1,8 +1,8 @@
 import { Slice, createSlice } from "@reduxjs/toolkit";
-import { MessageSliceProps, RoomSliceProps } from "../../types";
+import {  RoomSliceProps } from "../../types";
 import { createARoomThunk, getRoomDataThunk } from "./room.thunk";
 
-const roomSlice : Slice<RoomSliceProps> = createSlice({
+const roomSlice : Slice<RoomSliceProps | undefined> = createSlice({
     name: "room",
     initialState: {
         room: null,
@@ -13,18 +13,18 @@ const roomSlice : Slice<RoomSliceProps> = createSlice({
     extraReducers: (builder) => {
         builder
         // create
-        .addCase(createARoomThunk.pending, (state,action) => {
+        .addCase(createARoomThunk.pending, (state) => {
             state.status = 'loading';
         })
-        .addCase(createARoomThunk.fulfilled, (state,action) => {
+        .addCase(createARoomThunk.fulfilled, (state) => {
             state.status = 'success';
         })
-        .addCase(createARoomThunk.rejected, (state,action) => {
+        .addCase(createARoomThunk.rejected, (state) => {
             state.status = 'failed';
         })
 
         // get
-        .addCase(getRoomDataThunk.pending, (state,action) => {
+        .addCase(getRoomDataThunk.pending, (state) => {
             state.status = 'loading';
         })
         .addCase(getRoomDataThunk.fulfilled, (state,action) => {
@@ -32,7 +32,7 @@ const roomSlice : Slice<RoomSliceProps> = createSlice({
             state.status = 'success';
             
         })
-        .addCase(getRoomDataThunk.rejected, (state,action) => {
+        .addCase(getRoomDataThunk.rejected, (state) => {
             state.status = 'failed';
         })
     }

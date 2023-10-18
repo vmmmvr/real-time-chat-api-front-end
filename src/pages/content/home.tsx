@@ -1,9 +1,5 @@
-import Navbar from '../components/navbar'
 import LeftSidebar from '../components/left-sidebar'
 import RightSidebar from '../components/right-sidebar'
-import { Routes, Route } from 'react-router-dom'
-import Channels from '../Channel/channels'
-import Rooms from '../Room/rooms'
 import MainContent from './main-content'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
@@ -13,7 +9,7 @@ import MainMenuBar from '../components/main-menu-bar'
 
 export default function Home()  {
   const dispatch = useDispatch();
-  const {publicChannels} = useSelector((state: any) => state.channel);
+  // const {publicChannels} = useSelector((state: any) => state.channel);
 
   const {accessToken, refreshToken} = useSelector((state: any) => state.auth);
 
