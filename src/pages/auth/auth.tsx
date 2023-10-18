@@ -7,6 +7,7 @@ import { AnyAction } from 'redux';
 import Loading from '../components/loading';
 import Register from './register';
 import ErrorMessage from '../components/error';
+import girlsvg from "../../assets/Girl-Workplace.svg";
 
 export default function Auth() {
 
@@ -30,11 +31,19 @@ if(user) {
            <Loading /> 
         </div>
       
-      : 
-       ( <Routes>
-      <Route path='/login' element={ <Login /> } />
-      <Route path='/register' element={   <Register />  } />
-    </Routes> )
+      : <div className=' flex flex-col w-full items-center sm:flex-row h-full'>
+          {
+             ( <Routes>
+              <Route path='/login' element={ <Login /> } />
+              <Route path='/register' element={   <Register />  } />
+            </Routes> )
+          }
+
+<div className="bg-primary w-full sm:w-[60%]  h-full flex items-center justify-center">
+                <img src={girlsvg}  alt="" />
+              </div>
+      </div>
+      
       
       
       }

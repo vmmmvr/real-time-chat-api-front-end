@@ -64,7 +64,7 @@ export  function SideBarChannelViewer({channels, title}: {channels: [], title: s
    const params = useParams();
 
     function showMenuItem(uuid) {
-      setOpenMenuItems((state) => {
+      setOpenMenuItems((state : any) => {
           const item  = (state.find(item => item.itemuuid === uuid)) ;
           const filtered = state.filter(st => st.itemuuid !== uuid);
           return [...filtered, {...item, isOpen: !item?.isOpen}]
@@ -98,7 +98,7 @@ export  function SideBarChannelViewer({channels, title}: {channels: [], title: s
    
       </div>
 {
-        channels.map((chnnl, index) => (   <div key={chnnl.uuid} className="bg-white rounded-md px-2">
+        channels.map((chnnl: any, index) => (   <div key={chnnl.uuid} className="bg-white rounded-md px-2">
         {/* room  */}
         <div
           className={`flex flex-row justify-between cursor-pointer ${params["*"]?.split("/")[1] === chnnl.uuid ? "bg-primary" : ""} mt-2 mb-1  p-2 rounded-md`}

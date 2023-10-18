@@ -1,4 +1,3 @@
-import React from 'react'
 import { Logo } from './icons'
 import { BiGridAlt, BiGroup, BiMessageDetail, BiPhone , BiUserCircle} from 'react-icons/bi'
 

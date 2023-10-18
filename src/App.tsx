@@ -1,7 +1,3 @@
-import { AnyAction } from "redux";
-import { logoutUserThunk } from "./redux/auth/auth.thunk"
-import { useDispatch, useSelector } from "react-redux"
-import Navbar from "./pages/components/navbar";
 import Home from "./pages/content/home";
 function App() {
 
