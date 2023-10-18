@@ -7,7 +7,7 @@ import { AnyAction } from 'redux';
 import Loading from '../components/loading';
 import Register from './register';
 import ErrorMessage from '../components/error';
-import girlsvg from "../../assets/Girl-Workplace.svg";
+import girlsvg from "/Girl-Workplace.svg";
 
 export default function Auth() {
 
@@ -39,10 +39,10 @@ if(user) {
             </Routes> )
           }
 
-<div className="bg-primary w-full sm:w-[60%]  h-full flex items-center justify-center">
-                <img src={girlsvg}  alt="" />
+        <div className="bg-primary w-full sm:w-[60%]  h-full flex items-center justify-center">
+                        <img src={girlsvg}  alt="" />
+                      </div>
               </div>
-      </div>
       
       
       
