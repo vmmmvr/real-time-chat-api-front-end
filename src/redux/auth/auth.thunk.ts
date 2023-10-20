@@ -2,6 +2,33 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { AuthCreditential, UserProps } from "../../types";
 
+export const registerThunk = createAsyncThunk("/auth/register", async ({email,name, password}: UserProps, {rejectWithValue}) => {
+    try {
+        const res = await  axios.post('http://localhost:1330/api/user',  {
+        name,    
+        email,
+            password,
+         }, {
+            headers: {
+              "Content-Type":"Application/json"
+            }
+          })
+          
+      
+      const {data} = res;
+      
+        return data;
+    } catch (error: any) {
+            console.log({
+                error
+            });
+          return  rejectWithValue({
+                errorCode: error?.response?.status,
+                errorMessage: error?.response?.data?.[0] ?? error.response.data
+            }) 
+    }
+   
+  });
 export const loginThunk = createAsyncThunk("/auth/login", async ({email, password}: UserProps, {rejectWithValue}) => {
     try {
         const res = await  axios.post('http://localhost:1330/api/sessions',  {
