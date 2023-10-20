@@ -33,7 +33,7 @@ export default function Home()  {
 
       <div className='w-full'>
       {/* <Navbar /> */}
-        <div className='px-5 py-5 flex w-full justify-between h-[92vh]'>
+        <div className='px-5 py-5 flex w-full justify-between h-[92vh] sm:h-screen '>
         <LeftSidebar />
             
                 <div className='flex-1 bg-white mx-5 '>
