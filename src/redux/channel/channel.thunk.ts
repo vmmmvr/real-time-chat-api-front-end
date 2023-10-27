@@ -49,9 +49,7 @@ export const loadPublicChannelsThunk = createAsyncThunk("/channels/all", async (
       
       const {data} = res;
     
-          console.log({
-            data
-          });
+     
           
         return data;
     } catch (error: any) {
@@ -78,9 +76,7 @@ export const loadPrivateChannelsThunk = createAsyncThunk("/channels/all/me", asy
       
       const {data} = res;
     
-          console.log({
-            data
-          });
+     
           
         return data;
     } catch (error: any) {

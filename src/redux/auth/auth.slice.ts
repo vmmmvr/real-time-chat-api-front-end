@@ -80,9 +80,12 @@ export const authSlice = createSlice({
         })
         .addCase(logoutUserThunk.fulfilled, (state, action) => {
           state.status = "succeeded";
+          localStorage.removeItem('rtca_access_token')
+          localStorage.removeItem('rtca_refresh_token')
           state.user = null;
           state.accessToken = null;
           state.refreshToken = null;
+          
           
         })
         .addCase(logoutUserThunk.rejected, (state, action) => {

@@ -2,12 +2,11 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { AnyAction } from "redux";
-import { getAchannelThunk } from "../../redux/channel/channel.thunk";
 import Loading from "../components/loading";
 import { AddIcon } from "../components/icons";
 import DialogComponent from "../components/dialog";
-import AddChannel from "./add-channel";
 import AddRoom from "../Room/add-room";
+import { getAchannelThunk } from "@/redux";
 
 export default function Channels() {
   const dispatch = useDispatch();
@@ -19,9 +18,7 @@ export default function Channels() {
  
   
   useEffect(() => {
-    console.log({
-      openedChannel
-    });
+  
       dispatch(getAchannelThunk({channeluuid: uuid ?? "", accessToken, refreshToken}) as unknown as AnyAction)
     return () => {
       

@@ -1,4 +1,3 @@
-import {useParams} from "react-router-dom";
 import {  Routes, Route} from "react-router-dom";
 import Channels from '../Channel/channels';
 import Rooms from '../Room/rooms';

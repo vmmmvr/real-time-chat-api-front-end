@@ -4,7 +4,7 @@ import App from './App.tsx'
 import './index.css'
 import {  BrowserRouter, Route, Routes} from "react-router-dom";
 import { Provider } from 'react-redux';
-import redux from './redux';
+import {store} from './redux';
 import AuthRoute from './pages/auth/auth-route.tsx';
 import Login from './pages/auth/login.tsx';
 import Auth from './pages/auth/auth.tsx';
@@ -12,7 +12,7 @@ import Auth from './pages/auth/auth.tsx';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-      <Provider store={redux.store}>
+      <Provider store={store}>
       <BrowserRouter>
     
     <Routes>
