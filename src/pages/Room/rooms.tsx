@@ -5,9 +5,8 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { AnyAction } from "redux";
-import { sendMessageThunk } from "../../redux/messages/message.thunk";
-import { getRoomDataThunk } from "../../redux/room/room.thunk";
 import Loading from "../components/loading";
+import { getRoomDataThunk, sendMessageThunk } from "@/redux";
 export default function Rooms() {
   const { uuid } = useParams();
   const { publicChannels } = useSelector((state: any) => state.channel);
@@ -27,10 +26,7 @@ export default function Rooms() {
   const roomLoadingStatus = useSelector((state: any) => state.room.status);
   const messageStatus = useSelector((state: any) => state.message.status);
 
-  console.log({
-    uuid,
-    room,
-  });
+
 
   useEffect(() => {
     dispatch(

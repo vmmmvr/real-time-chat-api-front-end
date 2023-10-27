@@ -3,8 +3,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { AnyAction } from "redux";
-import { createChannelsThunk, loadPrivateChannelsThunk,loadPublicChannelsThunk } from "../../redux/channel/channel.thunk";
-import { createARoomThunk } from "../../redux/room/room.thunk";
+import { createARoomThunk, loadPublicChannelsThunk, loadPrivateChannelsThunk } from "@/redux";
 
 export default function AddRoom({dialogCloser}: {dialogCloser: Function}) {
     const { register, formState: { errors }, handleSubmit } = useForm();

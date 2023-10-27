@@ -7,7 +7,7 @@ export default function RightSidebar() {
 
 
   return (
-    <div className="flex-2 lg:w-1/5 w-1/6 bg-white rounded-md p-3 h-56 hidden sm:block">
+    <div className="flex-2 lg:w-1/5 w-1/6 bg-white rounded-md p-3 h-56 hidden lg:block ">
       <div>
         <h4 className="text-gray-500">Users</h4>
         <div className="pt-5">

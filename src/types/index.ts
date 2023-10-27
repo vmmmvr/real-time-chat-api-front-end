@@ -15,7 +15,8 @@ export interface UserProps {
     channels?: []
     messages?: [] 
     createdAt?: string
-    myChannel?: []
+    myChannel?: [],
+    profile_image?: string
 }
 
 export interface ChannelSliceProps   {

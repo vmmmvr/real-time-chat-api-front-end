@@ -25,13 +25,7 @@ if(user) {
   return (
    <div className='w-full bg-white h-screen'>
         <ErrorMessage  />
-    {
-      status === "loading"  ?
-        <div className='w-full h-full flex justify-center items-center'>
-           <Loading /> 
-        </div>
-      
-      : <div className=' flex flex-col w-full items-center sm:flex-row h-full'>
+   <div className=' flex flex-col w-full items-center sm:flex-row h-full'>
           {
              ( <Routes>
               <Route path='/login' element={ <Login /> } />
@@ -46,7 +40,6 @@ if(user) {
       
       
       
-      }
      
    </div>
   )

@@ -40,7 +40,6 @@ export const createARoomThunk = createAsyncThunk("/api/rooms/create", async ({na
 export const getRoomDataThunk = createAsyncThunk("/api/rooms/roomuuid", async ({roomuuid, accessToken, refreshToken}: GetRoomProps, {rejectWithValue}) => {
     try {
    
-      console.log({roomuuid});
       
         
         const res = await  axios.get(`http://localhost:1330/api/rooms/${roomuuid}`, {
