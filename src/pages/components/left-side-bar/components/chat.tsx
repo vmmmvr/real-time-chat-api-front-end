@@ -1,9 +1,14 @@
 import { BiGroup } from "react-icons/bi";
 import { SearchIcon } from "../../icons";
 import { SideBarChannelViewer } from "./side-bar-channel-view";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
 
 export function ChatSideBarComponent({ setShowAddChannelModal, publicChannels, privateChannels}) {
-    return (
+  
+
+
+  return (
           
       <div className="w-full h-full flex flex-col">
         <div className="flex flex-row justify-between items-center">

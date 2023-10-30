@@ -3,19 +3,32 @@ import { useParams, Link } from "react-router-dom";
 import { RoomComponent } from "./room";
 
 export  function SideBarChannelViewer({channels, title}: {channels: [], title: string}) {
-    const params = useParams();
-     const [selectedChannel, setselectedChannel] = useState(null)
+     const [selected, setselected] = useState({
+      channeluuid: null,
+      roomuuid: null
+     })
    
+
+     const param = useParams();
+     const spiltted = param["*"]?.toString().split("/")
+   
+     console.log({selected});
+   
+   
+
    useEffect(() => {
       
      
      return () => {
        
      }
-   }, [channels, params])
+   }, [channels, param])
  
   
-   
+   const theme = {
+    selected: "flex  w-full flex-row justify-between cursor-pointer rounded-md ",
+    unselected: "flex  w-full flex-row justify-between cursor-pointer rounded-md"
+   };
  
  
    
@@ -23,23 +36,17 @@ export  function SideBarChannelViewer({channels, title}: {channels: [], title: s
      <div>
  {
          channels.map((chnnl: any, index) => {
-               const currenturluuid = params["*"]?.split("/")[1];
-               // console.log({
-               //   currenturluuid,
-               //   room: chnnl.rooms
-               // });
-               
-               const seletedChannel =  currenturluuid === chnnl.uuid ??  chnnl.rooms.find(room => room.uuid === currenturluuid)
+   
            return (
-             <div key={chnnl.uuid} className={`mb-1 ${seletedChannel ? "bg-primar"  : ""}  p-2 rounded-md`}>
+             <div key={chnnl.uuid} className={`mb-1 ${selected.channeluuid === chnnl.uuid ? "bg-primary-hover bg-opacity-80"  : ""}  p-2 rounded-md`}>
          {/* room  */}
          <div
-           className={`flex  w-full flex-row justify-between cursor-pointer ${seletedChannel ? "bg-primar" : ""} rounded-md`}
+           className={` ${selected.channeluuid === chnnl.uuid ? theme.selected: theme.unselected} `}
          >
-             <Link to={`/channels/${chnnl.uuid}` } onClick={() => setselectedChannel({...chnnl})}>
-               <div  className="flex flex-row items-center text-clip">
+             <Link to={`/channels/${chnnl.uuid}` } onClick={() => setselected({channeluuid: chnnl.uuid, roomuuid: chnnl.rooms[0].uuid})}>
+               <div  className="flex flex-row items-center  text-clip">
                  <img src="/avatar.svg" className="w-5 h-5 rounded-full mx-1" alt="" />
-               <span className={`  ${seletedChannel ? "text-gray-600" : "text-gray-600"}  truncate ...`}>{chnnl.name}</span>
+               <span className={`  ${selected.channeluuid === chnnl.uuid ? "text-gray-600" : "text-gray-600"}  truncate ...`}>{chnnl.name}</span>
  
                </div>
              </Link>
@@ -60,8 +67,8 @@ export  function SideBarChannelViewer({channels, title}: {channels: [], title: s
              chnnl.rooms.map(room => (  <div key={room.uuid} className={`py-1 
               cursor-pointer rounded-md  
                 `}>
-             <Link to={`/rooms/${room.uuid}`} >
-                 <RoomComponent selected={params["*"]?.split("/")[1] === room.uuid ? true : false} room={room} />
+             <Link to={`/rooms/${room.uuid}`} onClick={() => setselected({channeluuid: room.channeluuid, roomuuid: room.uuid})}>
+                 <RoomComponent selected={ room.uuid === selected.roomuuid ? true : false} room={room} />
                  </Link>
              </div>))
            }
