@@ -8,8 +8,8 @@ export  function RoomComponent({selected, room}: {selected: boolean, room: Room}
     
       
     return (
-      <div className={`bg-white flex flex-row justify-between items-center 
-      h-20 w-full px-4 py-2 cursor-pointer  hover:bg-primary-hover hover:text-white rounded-lg ${selected ? "bg-primary-hover text-white": "text-primary"}`}>
+      <div className={`${selected ? "bg-primary  shadow-primary" : "bg-white hover:bg-primary-hover hover:text-white"} flex flex-row justify-between items-center 
+      h-20 w-full px-4 py-2 cursor-pointer    rounded-lg  shadow-sm`}>
       <div className="flex flex-row w-full">
         <img src="/vite.svg" alt=""  className="rounded-full border-gray-500 border  w-10 h-10"/>
           <div className="flex flex-col ml-3">

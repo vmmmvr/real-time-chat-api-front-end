@@ -76,7 +76,7 @@ export default function Register() {
                 <div className="mb-5 w-full flex justify-center flex-col items-center">
             
                       <div>
-                        <img src={filePreview} alt="preview" className="w-32 h-32 rounded-full" />
+                        <img src={filePreview} alt="" className="w-32 h-32 rounded-full" />
                       </div>
   
               <ImageUploader  children={<input id="dropzone-file" type="file"  {...register("image")} className="hidden" />}  />

@@ -29,94 +29,99 @@ export default function Login() {
 
   return (
     <>
-      {status === "loading" ? (
-        <div>
-          {" "}
-          <Loading />{" "}
-        </div>
-      ) : (
+      {(
       
                 <div className=" mx-3  px-5 py-7 rounded-lg bg-white h-full items-center  justify-between w-full sm:w-[40%]  flex flex-col">
                 <Logo title="Chat IO" classes="font-semibold" size={40} />
+                {
+
+status === "loading" ? (
+  <div>
+    {" "}
+    <Loading />{" "}
+  </div>
+) :  (
                     <div className="flex flex-col max-w-sm">
-                        <p className="my-3 font-semibold">Login</p> 
-                        <p  className="my-5 text-gray-700"> with your Data that you entered during your  
-                        Registration</p>
-                      <form
-                        className=""
-                        onSubmit={handleSubmit(
-                          async (
-                            data // if(data['email'] !== null && data['password'] !== null) {
-                          ) =>
-                            Promise.resolve(
-                              dispatch(loginThunk({ ...data }) as unknown as AnyAction)
-                            ).then(({ payload }) => {
-                              dispatch(
-                                getUserThunk({ ...payload }) as unknown as AnyAction
-                              );
-                            })
-                        )}
-                      >
-                        <div className="flex flex-col mb-5 ">
-                          <label className="text-gray-700 font-semibold mb-1" htmlFor="email">
-                            Email
-                          </label>
-                          <input
-                            {...register("email", { required: true })}
-                            placeholder="Email"
-                            type="email"
-                            className="input-style "
-                          />
-                          <small className="text-red-500">
-                            {" "}
-                            {errors.email?.type === "required" &&
-                              "email is required"}{" "}
-                          </small>
-                          <i className="bx bxl-flask"></i>
-                        </div>
-                        <div className="flex flex-col mb-5">
-                          <label className="text-gray-700 font-semibold  mb-1" htmlFor="email">
-                            Password
-                          </label>
-                          <input
-                            {...register("password", { required: true })}
-                            placeholder=""
-                            type="password"
-                            className="input-style   "
-                          />
-                          <small className="text-red-500">
-                            {" "}
-                            {errors.password?.type === "required" &&
-                              "password is required"}{" "}
-                          </small>
-                        </div>
-
-                        <button
-                          className="button-style"
-                          type="submit"
-                        >
-                          login
-                        </button>
-
-                        <div className="mt-5 text-sm">
-                              <div className="flex flex-row">
-                              <p>Don't have account yet ?</p>
-                                <Link to={"/auth/register"}>
-                                  <p className="text-primary font-semibold mx-2"> Register</p>
-                                    
-                                </Link>
-                              </div>
-                              <div>
-                                <Link to={"/auth/register"}>
-                                  <p> Forgot password</p>
-                                    
-                                </Link>
-                              </div>
-                        </div>
-                      </form>
-                      <div>
-                      </div>
+                    <p className="my-3 font-semibold">Login</p> 
+                    <p  className="my-5 text-gray-700"> with your Data that you entered during your  
+                    Registration</p>
+                  <form
+                    className=""
+                    onSubmit={handleSubmit(
+                      async (
+                        data // if(data['email'] !== null && data['password'] !== null) {
+                      ) =>
+                        Promise.resolve(
+                          dispatch(loginThunk({ ...data }) as unknown as AnyAction)
+                        ).then(({ payload }) => {
+                          dispatch(
+                            getUserThunk({ ...payload }) as unknown as AnyAction
+                          );
+                        })
+                    )}
+                  >
+                    <div className="flex flex-col mb-5 ">
+                      <label className="text-gray-700 font-semibold mb-1" htmlFor="email">
+                        Email
+                      </label>
+                      <input
+                        {...register("email", { required: true })}
+                        placeholder="Email"
+                        type="email"
+                        className="input-style "
+                      />
+                      <small className="text-red-500">
+                        {" "}
+                        {errors.email?.type === "required" &&
+                          "email is required"}{" "}
+                      </small>
+                      <i className="bx bxl-flask"></i>
                     </div>
+                    <div className="flex flex-col mb-5">
+                      <label className="text-gray-700 font-semibold  mb-1" htmlFor="email">
+                        Password
+                      </label>
+                      <input
+                        {...register("password", { required: true })}
+                        placeholder=""
+                        type="password"
+                        className="input-style   "
+                      />
+                      <small className="text-red-500">
+                        {" "}
+                        {errors.password?.type === "required" &&
+                          "password is required"}{" "}
+                      </small>
+                    </div>
+
+                    <button
+                      className="button-style"
+                      type="submit"
+                    >
+                      login
+                    </button>
+
+                    <div className="mt-5 text-sm">
+                          <div className="flex flex-row">
+                          <p>Don't have account yet ?</p>
+                            <Link to={"/auth/register"}>
+                              <p className="text-primary font-semibold mx-2"> Register</p>
+                                
+                            </Link>
+                          </div>
+                          <div>
+                            <Link to={"/auth/register"}>
+                              <p> Forgot password</p>
+                                
+                            </Link>
+                          </div>
+                    </div>
+                  </form>
+                  <div>
+                  </div>
+                </div>
+                  )
+                }
 
 
                   <div><span>back</span></div>
