@@ -95,7 +95,10 @@ axiosInstance.interceptors.response.use(
           // If refreshing fails, clear the tokens and redirect to login
           // document.cookie = `accessToken=; Max-Age=0; path=/`;
           // document.cookie = `refreshToken=; Max-Age=0; path=/`;
-          window.location.href = "/auth/sign-in"; // Redirect to sign-in
+          if(window.location.href !== "/auth/sign-in") {
+            window.location.href = "/auth/sign-in"; // Redirect to sign-in
+          }
+         
         }
       }
     }
