@@ -47,7 +47,7 @@ export default function TemplateLayout({ children }: TemplateLayoutProps) {
 
   return (
 
-    isAuthRoute ? (<>{children}</>) : (<div className=" flex flex-col md:flex-row h-full">
+    isAuthRoute ? (<>{children}</>) : (<div className=" flex flex-col md:flex-row h-full p-10 bg-blue-gray-100 bg-opacity-50">
       {/* Left Sidebar */}
       <LeftSidebar
         open={leftDrawerStatus}
@@ -61,6 +61,7 @@ export default function TemplateLayout({ children }: TemplateLayoutProps) {
       {/* Right Sidebar */}
       <RightSidebar
         allUsers={allUsers}
+        allUsersLoading={getUsersLoading}
         refreshGetUsers={refreshGetUsers}
         open={rightDrawerStatus}
         toggleDrawer={toggleRightDrawer}

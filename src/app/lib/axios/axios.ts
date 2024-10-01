@@ -95,7 +95,7 @@ axiosInstance.interceptors.response.use(
           // If refreshing fails, clear the tokens and redirect to login
           // document.cookie = `accessToken=; Max-Age=0; path=/`;
           // document.cookie = `refreshToken=; Max-Age=0; path=/`;
-          // window.location.href = "/auth/sign-in"; // Redirect to sign-in
+          window.location.href = "/auth/sign-in"; // Redirect to sign-in
         }
       }
     }
@@ -119,6 +119,7 @@ export const getMe = async () => {
   const response = await axiosInstance.get(ALL_END_POINTS.USERS.ME);
   return response.data;
 };
+
 
 export const getUsers = async () => {
   const response = await axiosInstance.get(ALL_END_POINTS.USERS.ALL_USERS);

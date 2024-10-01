@@ -39,8 +39,8 @@ export default function HomePage() {
   return (
       <div className="w-full h-full flex flex-col justify-between md:justify-center items-center bg-white p-5 rounded-lg md:rounded-none">
        <div className="flex md:hidden justify-between items-center w-full ">
-       <LuMenu onClick={toggleLeftDrawer} size={24}/>
-       <FaUsers onClick={toggleRightDrawer}  size={24}/>
+       <LuMenu className="cursor-pointer" onClick={toggleLeftDrawer} size={24}/>
+       <FaUsers className="cursor-pointer" onClick={toggleRightDrawer}  size={24}/>
        </div>
          <div className="flex flex-col gap-5">
           <h4 className="font-bold text-4xl text-primary-main">Welcome to ChatIO</h4>

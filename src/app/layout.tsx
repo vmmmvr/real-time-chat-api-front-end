@@ -21,7 +21,7 @@ export default function RootLayout({
       <head>
         {/* Meta tags from metadata are automatically applied by Next.js */}
       </head>
-      <body className="p-10 w-full h-full bg-blue-gray-900">
+      <body className=" w-full h-full ">
         <ReactQueryProvider>
              <TemplateLayout>{children}</TemplateLayout>
         </ReactQueryProvider>

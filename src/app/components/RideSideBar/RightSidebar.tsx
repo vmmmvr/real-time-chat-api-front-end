@@ -5,8 +5,11 @@ import { useAuth } from '@/app/lib/context/AuthContext';
 import { useAddFriend, useRemoveFriend } from '@/app/lib/services/users.sevice';
 import { User, Users } from '@/app/lib/types/user';
 import { missingProperties } from '@/app/lib/utils/utils';
-import { Drawer, Button, Typography } from '@material-tailwind/react';
+import { Drawer, Button, Typography, Spinner } from '@material-tailwind/react';
 import { useState } from 'react';
+import cookies from 'js-cookie';
+import { redirect } from 'next/navigation';
+
 
 const colorsList = [
   "bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500",
@@ -22,7 +25,7 @@ const getIndexColor = (index: number) => {
   return Number(index) < Number(colorsList.length) ? index : Number(index) % Number(colorsList.length);
 };
 
-export default function RightSidebar({ open, toggleDrawer, isStatic, allUsers, refreshGetUsers }: { open: boolean, toggleDrawer: () => void, isStatic: boolean, allUsers: Users, refreshGetUsers: () => void }) {
+export default function RightSidebar({ open, toggleDrawer, isStatic, allUsers, allUsersLoading, refreshGetUsers }: { open: boolean, toggleDrawer: () => void, allUsersLoading: boolean, isStatic: boolean, allUsers: Users, refreshGetUsers: () => void }) {
   const [selectedUser, setSelectedUser] = useState<String | undefined>("");
 
   const { mutateAsync: addFriend, isPending: addFriendLoading, error: addFriendError } = useAddFriend(selectedUser);
@@ -47,16 +50,17 @@ export default function RightSidebar({ open, toggleDrawer, isStatic, allUsers, r
   }
 
 
-
   const loading = addFriendLoading || removeFriendLoading;
-
-
 
   return (
     <>
       {isStatic ? (
         <div className="p-4 bg-white shadow-md w-full  flex flex-col  max-w-[300px] rounded-e-3xl divide-y-2 divide-gray-100">
-          <DrawerComponent user={user} allUsers={allUsers} handleAddFriend={handleAddFriend} handleRemoveFriend={handleRemoveFriend} />
+         {
+            allUsersLoading  ? <div className='w-full h-full flex justify-center items-center'>
+          <Spinner className="h-10 w-10 border-primary-main" {...missingProperties} />
+            </div> : <DrawerComponent user={user} allUsers={allUsers} handleAddFriend={handleAddFriend} handleRemoveFriend={handleRemoveFriend} />
+          }
         </div>
       ) : (
         <Drawer
