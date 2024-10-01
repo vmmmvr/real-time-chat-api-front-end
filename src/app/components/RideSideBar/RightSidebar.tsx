@@ -18,8 +18,8 @@ const colorsList = [
   "bg-gradient-to-r from-primary-200 via-primary-300 to-primary-600"
 ]
 
-const getIndexColor = (index: Number) => {
-  return index < colorsList.length ? index : Number(index) % Number(colorsList.length);
+const getIndexColor = (index: number) => {
+  return Number(index) < Number(colorsList.length) ? index : Number(index) % Number(colorsList.length);
 };
 
 export default function RightSidebar({ open, toggleDrawer, isStatic, allUsers, refreshGetUsers }: { open: boolean, toggleDrawer: () => void, isStatic: boolean, allUsers: Users, refreshGetUsers: () => void }) {
@@ -75,7 +75,7 @@ export default function RightSidebar({ open, toggleDrawer, isStatic, allUsers, r
 }
 
 
-function DrawerComponent(props: { user: User, handleRemoveFriend: () => void, handleAddFriend: () => void, allUsers: Users }) {
+function DrawerComponent(props: { user: User, handleRemoveFriend: (username?: String) => void, handleAddFriend: (username?: String) => void, allUsers: Users }) {
   return (
     <>
       <div className="flex mb-5 flex-col w-full">
@@ -84,7 +84,7 @@ function DrawerComponent(props: { user: User, handleRemoveFriend: () => void, ha
         </Typography>
         <div className="flex flex-col gap-2">
           {
-            props.user?.friends.map((friend: User, index: Number) => {
+            props?.user?.friends?.map((friend: User, index) => {
 
               return (
                 <div key={String(friend._id)} className='flex items-center justify-between gap-2'>
@@ -95,7 +95,7 @@ function DrawerComponent(props: { user: User, handleRemoveFriend: () => void, ha
                       <Typography className='font-normal text-gray-400 text-sm' {...missingProperties}>@{friend.username?.slice(0, 6)}</Typography>
                     </div>
                   </div>
-                  <Button onClick={() => props.handleRemoveFriend(friend?.username)} {...missingProperties} className="bg-red-400 px-3 capitalize">
+                  <Button onClick={() => props?.handleRemoveFriend(friend?.username)} {...missingProperties} className="bg-red-400 px-3 capitalize">
                     Remove
                   </Button>
                 </div>
@@ -110,7 +110,7 @@ function DrawerComponent(props: { user: User, handleRemoveFriend: () => void, ha
         </Typography>
         <div className=" overflow-y-auto  h-full px-2 ">
           {
-            props.allUsers?.map(user => (
+            props?.allUsers?.map(user => (
               <div key={String(user._id)} className='flex items-center justify-between  my-3'>
                 <div className='flex gap-3 items-center'>
                   <div className={`w-10 h-10 rounded-full bg-gradient-to-r ${colorsList[Math.round(Math.random())]}`}></div>
@@ -119,7 +119,7 @@ function DrawerComponent(props: { user: User, handleRemoveFriend: () => void, ha
                     <Typography className='font-normal text-gray-400 text-sm' {...missingProperties}>@${user.username?.slice(0, 5)}...</Typography>
                   </div>
                 </div>
-                <Button onClick={() => props.handleAddFriend(user?.username)} {...missingProperties} className="bg-primary-main px-3 capitalize">
+                <Button onClick={() => props?.handleAddFriend(user?.username)} {...missingProperties} className="bg-primary-main px-3 capitalize">
                   Add
                 </Button>
               </div>

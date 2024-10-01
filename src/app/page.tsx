@@ -9,8 +9,9 @@ import io, { Socket } from 'socket.io-client';
 import { FaUsers } from "react-icons/fa";
 import { LuMenu } from "react-icons/lu";
 import { useApp } from "./lib/context/AppContext";
+import { DefaultEventsMap } from "@socket.io/component-emitter";
 // Set the correct URL for the Socket.IO server
-let socket;
+let socket: Socket<DefaultEventsMap, DefaultEventsMap>;
 
 export default function HomePage() {
   const { toggleLeftDrawer, toggleRightDrawer} = useApp();

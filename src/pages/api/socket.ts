@@ -4,12 +4,12 @@ import { NextApiRequest, NextApiResponse } from 'next';
 // Declare io globally so it doesn't get re-initialized
 let io: SocketIOServer | undefined;
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (res.socket.server.io) {
+export default function handler(req: any, res: any) {
+  if (res?.socket?.server.io) {
     console.log('Socket.io is already running');
   } else {
     console.log('Starting Socket.io server...');
-    io = new SocketIOServer(res.socket.server as any, {
+    io = new SocketIOServer(res?.socket?.server as any, {
       cors: {
         origin: "*",
         methods: ["GET", "POST"],

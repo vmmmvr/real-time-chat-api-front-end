@@ -16,7 +16,7 @@ export default function TemplateLayout({ children }: TemplateLayoutProps) {
   // List of routes that shouldn't be wrapped with TemplateLayout
   const authRoutes = ["/auth/sign-in", "/auth/sign-up"];
 
-  const isAuthRoute = authRoutes.includes(pathname);
+  const isAuthRoute = authRoutes.includes(String(pathname));
   const { leftDrawerStatus, rightDrawerStatus, toggleLeftDrawer, toggleRightDrawer} = useApp();
   const [isStatic, setIsStatic] = useState(false);
 
