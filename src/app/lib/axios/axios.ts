@@ -29,6 +29,15 @@ const getCookies = () => {
 
   return parse(cookieString);
 };
+const setCookie = (name: any, value: any, days: any) => {
+  let expires = "";
+  if (days) {
+    const date = new Date();
+    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+    expires = "; expires=" + date.toUTCString();
+  }
+  document.cookie = name + "=" + (value || "") + expires + "; path=/";
+};
 
 // Request interceptor to add the access token to the headers
 axiosInstance.interceptors.request.use(
@@ -80,7 +89,8 @@ axiosInstance.interceptors.response.use(
 
           // Store the new access token in the cookies (optional, depending on your server implementation)
           document.cookie = `accessToken=${accessToken}; path=/`;
-
+          // Example usage:
+          setCookie("accessToken", accessToken, 7);
           // Retry the original request with the new token
           if (originalRequest.headers) {
             originalRequest.headers["Authorization"] = `Bearer ${accessToken}`;

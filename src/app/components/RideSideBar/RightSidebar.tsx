@@ -72,7 +72,9 @@ export default function RightSidebar({ open, toggleDrawer, isStatic, allUsers, a
           placement="right"
           size={250} placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}        >
           <div className="flex flex-col h-full">
-            <DrawerComponent user={user} allUsers={allUsers} handleAddFriend={handleAddFriend} handleRemoveFriend={handleRemoveFriend} />
+          {
+             loading ? <Loading /> : <DrawerComponent user={user} allUsers={allUsers} handleAddFriend={handleAddFriend} handleRemoveFriend={handleRemoveFriend} />
+          } 
           </div>
         </Drawer>
       )}
