@@ -13,11 +13,12 @@ import ErrorAlert from '@/app/components/ErrorAlert/ErrorAlert';
 import  cookies  from 'js-cookie';
 import Link from 'next/link';
 import { missingProperties } from '@/app/lib/utils/utils';
+import { useAuth } from '@/app/lib/context/AuthContext';
 
 
 export default function SignInComponent() {
   const [userBody, setUserBody] = useState<SignInData>({});
-
+  const {refreshGetMe} = useAuth();
   const {mutateAsync: signIn, data: userSignInData, isPending: loading, isError, error: userSignInError, } = useSignIn(userBody);
   // formik
   const formik = useFormik({
@@ -29,7 +30,7 @@ export default function SignInComponent() {
     onSubmit: (values) => {
       setUserBody({...values});
       signIn().then(data => {
-   
+        refreshGetMe()
       })
     },
   });

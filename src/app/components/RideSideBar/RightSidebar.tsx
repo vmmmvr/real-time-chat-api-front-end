@@ -6,7 +6,7 @@ import { useAddFriend, useRemoveFriend } from '@/app/lib/services/users.sevice';
 import { User, Users } from '@/app/lib/types/user';
 import { missingProperties } from '@/app/lib/utils/utils';
 import { Drawer, Button, Typography, Spinner } from '@material-tailwind/react';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import cookies from 'js-cookie';
 import { redirect } from 'next/navigation';
 import Loading from '../Loading/Loading';
@@ -34,6 +34,8 @@ export default function RightSidebar({ open, toggleDrawer, isStatic, allUsers, a
   const { mutateAsync: removeFriend, isPending: removeFriendLoading, error: removeFriendError } = useRemoveFriend(selectedUser);
 
   const { user, refreshGetMe } = useAuth();
+
+ 
   
   const handleAddFriend = useCallback((username?: any) => {
     setSelectedUser(username);

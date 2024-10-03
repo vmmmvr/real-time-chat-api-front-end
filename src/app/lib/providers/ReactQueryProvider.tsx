@@ -9,7 +9,8 @@ export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       refetchOnWindowFocus: false,  // Disable refetch on window focus globally
-      retry: 2,                     // Example: Retry failed queries twice
+      refetchOnMount: true,
+      retry: 4,                     // Example: Retry failed queries twice
       // staleTime: 1000 * 60 * 5, 
     },
     mutations: {

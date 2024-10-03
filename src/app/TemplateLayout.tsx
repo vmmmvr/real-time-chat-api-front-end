@@ -20,9 +20,18 @@ export default function TemplateLayout({ children }: TemplateLayoutProps) {
   const { leftDrawerStatus, rightDrawerStatus, toggleLeftDrawer, toggleRightDrawer} = useApp();
   const [isStatic, setIsStatic] = useState(false);
 
-  const {data: users, refetch: refreshGetUsers,isLoading: getUsersLoading, error} = useGetUsers();
-
+  const {data: users, refetch: refreshGetUsers, isLoading: getUsersLoading, error} = useGetUsers();
+  
   const allUsers = users?.data;
+ 
+
+  useEffect(() => {
+    refreshGetUsers();
+    console.log({allUsers});
+  return () => {
+    
+  };
+}, []);
 
   useEffect(() => {
     const handleResize = () => {
