@@ -9,6 +9,7 @@ import { Drawer, Button, Typography, Spinner } from '@material-tailwind/react';
 import { useState } from 'react';
 import cookies from 'js-cookie';
 import { redirect } from 'next/navigation';
+import Loading from '../Loading/Loading';
 
 
 const colorsList = [
@@ -50,16 +51,14 @@ export default function RightSidebar({ open, toggleDrawer, isStatic, allUsers, a
   }
 
 
-  const loading = addFriendLoading || removeFriendLoading;
+  const loading = addFriendLoading || removeFriendLoading || allUsersLoading;
 
   return (
     <>
       {isStatic ? (
         <div className="p-4 bg-white shadow-md w-full  flex flex-col  max-w-[300px] rounded-e-3xl divide-y-2 divide-gray-100">
-         {
-            allUsersLoading  ? <div className='w-full h-full flex justify-center items-center'>
-          <Spinner className="h-10 w-10 border-primary-main" {...missingProperties} />
-            </div> : <DrawerComponent user={user} allUsers={allUsers} handleAddFriend={handleAddFriend} handleRemoveFriend={handleRemoveFriend} />
+          {
+            loading ? <Loading /> : <DrawerComponent user={user} allUsers={allUsers} handleAddFriend={handleAddFriend} handleRemoveFriend={handleRemoveFriend} />
           }
         </div>
       ) : (
