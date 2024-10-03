@@ -36,12 +36,13 @@ export default function TemplateLayout({ children }: TemplateLayoutProps) {
         toggleRightDrawer();
       }
     };
+    
 
     handleResize(); // Check the screen size on initial load
     window.addEventListener("resize", handleResize); // Add event listener for resizing
 
     return () => window.removeEventListener("resize", handleResize); // Clean up on unmount
-  }, []);
+  }, [isStatic, toggleLeftDrawer, toggleRightDrawer]);
 
 
 

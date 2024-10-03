@@ -13,7 +13,7 @@ export const ALL_END_POINTS = {
     CHANGE_PASSWORD: "/users/change-password",
     ADD_FRIEND: "/users/friends/:friendUsername",
     REMOVE_FRIEND: "/users/friends/:friendUsername",
-    ALL_USERS: "/users"
+    ALL_USERS: "/users",
   },
 };
 
@@ -24,7 +24,6 @@ const axiosInstance = axios.create({
 
 // Helper to get cookies (assumed to be in the browser)
 const getCookies = () => {
-  
   if (typeof window === "undefined") return null;
   const cookieString = document.cookie; // Get cookies in the browser
 
@@ -36,7 +35,7 @@ axiosInstance.interceptors.request.use(
   (config) => {
     const cookies = getCookies();
     const accessToken = cookies?.accessToken;
-    
+
     if (accessToken && config.headers) {
       config.headers["Authorization"] = `Bearer ${accessToken}`;
     }
@@ -66,28 +65,25 @@ axiosInstance.interceptors.response.use(
 
       if (refreshToken && retry < 5) {
         try {
-          retry  = retry + 1;
+          retry = retry + 1;
           // Attempt to refresh the token
           const refreshResponse = await axiosInstance.post(
             ALL_END_POINTS.AUTH.REFRESH_TOKEN,
             { refreshToken }
           );
-         
+
           // Extract new access token from the refresh response
-          const {accessToken}= refreshResponse.data?.['data'];
-          if(accessToken) {
+          const { accessToken } = refreshResponse.data?.["data"];
+          if (accessToken) {
             retry = 0;
           }
-          console.log(accessToken);
-          
+
           // Store the new access token in the cookies (optional, depending on your server implementation)
           document.cookie = `accessToken=${accessToken}; path=/`;
 
           // Retry the original request with the new token
           if (originalRequest.headers) {
-            originalRequest.headers[
-              "Authorization"
-            ] = `Bearer ${accessToken}`;
+            originalRequest.headers["Authorization"] = `Bearer ${accessToken}`;
           }
 
           return axiosInstance(originalRequest);
@@ -95,10 +91,9 @@ axiosInstance.interceptors.response.use(
           // If refreshing fails, clear the tokens and redirect to login
           // document.cookie = `accessToken=; Max-Age=0; path=/`;
           // document.cookie = `refreshToken=; Max-Age=0; path=/`;
-          if(window.location.href !== "/auth/sign-in") {
+          if (window.location.href !== "/auth/sign-in") {
             // window.location.href = "/auth/sign-in"; // Redirect to sign-in
           }
-         
         }
       }
     }
@@ -123,19 +118,25 @@ export const getMe = async () => {
   return response.data;
 };
 
-
 export const getUsers = async () => {
   const response = await axiosInstance.get(ALL_END_POINTS.USERS.ALL_USERS);
   return response.data;
 };
 
 export const addFriend = async (username?: String) => {
-  const response = await axiosInstance.post(ALL_END_POINTS.USERS.ADD_FRIEND.replace(":friendUsername", String(username)));
+  const response = await axiosInstance.post(
+    ALL_END_POINTS.USERS.ADD_FRIEND.replace(":friendUsername", String(username))
+  );
   return response.data;
 };
 
 export const removeFriend = async (username?: String) => {
-  const response = await axiosInstance.delete(ALL_END_POINTS.USERS.REMOVE_FRIEND.replace(":friendUsername", String(username)));
+  const response = await axiosInstance.delete(
+    ALL_END_POINTS.USERS.REMOVE_FRIEND.replace(
+      ":friendUsername",
+      String(username)
+    )
+  );
   return response.data;
 };
 

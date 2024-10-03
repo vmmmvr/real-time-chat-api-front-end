@@ -14,8 +14,7 @@ export const useSignUp = (body: SignUpData) => {
     },
   });
 };
-export
- const useSignIn = (body: SignInData) => {
+export const useSignIn = (body: SignInData) => {
   return useMutation({
     mutationKey: ["signIn"],
     mutationFn: async () => {
@@ -34,11 +33,5 @@ export const useGetMe = () => {
       const data = await getMe();
       return data;
     },
-    // onSuccess: (data: unknown) => {
-    //   // Optionally set query data manually (if you need it)
-    //   queryClient.setQueryData(["getMe"], data);
-    // },
-    refetchInterval: 1000 * 60
-    // staleTime: 1000 * 60 * 5, // Optional: Keep data fresh for 5 minutes
   });
 };

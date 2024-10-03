@@ -37,7 +37,6 @@ export default function SignInComponent() {
  useEffect(() => {
   if(userSignInData) {
     const { refreshToken, accessToken } = userSignInData.data;
-    console.log({accessToken, refreshToken, userSignInData});
     
     if (refreshToken && accessToken) {
       // Set cookies for accessToken and refreshToken

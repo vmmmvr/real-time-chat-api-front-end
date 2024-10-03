@@ -25,14 +25,14 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export function AuthProvider({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const [user, setUser] = useState<User | null>(null);
-  const {data: MeDate,refetch: refreshGetMe, isPending, isError, error} = useGetMe();
-
+  const {data: MeDate,refetch: refreshGetMe, isPending, isError, error} = useGetMe(); 
   const isAuthenticated = !!user;
 
   useEffect(() => {
       if(MeDate && pathname !== "/") {
         redirect("/");
       }
+      
       setUser(MeDate?.data);
   
     return () => {

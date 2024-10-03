@@ -25,11 +25,9 @@ const SignUpForm = () => {
     },
     validationSchema: UserSignUpSchema,
     onSubmit: (values) => {
-      console.log(values);
       
       setUserBody({...values});
       signUp().then(data => {
-        console.log({userSignupData: data});
       })
     },
   });
