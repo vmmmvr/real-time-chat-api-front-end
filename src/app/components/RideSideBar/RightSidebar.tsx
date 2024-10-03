@@ -10,6 +10,7 @@ import { useCallback, useState } from 'react';
 import cookies from 'js-cookie';
 import { redirect } from 'next/navigation';
 import Loading from '../Loading/Loading';
+import React from 'react';
 
 
 const colorsList = [
@@ -34,7 +35,7 @@ export default function RightSidebar({ open, toggleDrawer, isStatic, allUsers, a
 
   const { user, refreshGetMe } = useAuth();
   
-  const handleAddFriend = useCallback((username?: string) => {
+  const handleAddFriend = useCallback((username?: any) => {
     setSelectedUser(username);
     addFriend().then(data => {
       refreshGetMe();
@@ -42,7 +43,7 @@ export default function RightSidebar({ open, toggleDrawer, isStatic, allUsers, a
     });
   }, [addFriend, refreshGetMe, refreshGetUsers]); // Dependencies
   
-  const handleRemoveFriend = useCallback((username?: string) => {
+  const handleRemoveFriend = useCallback((username?: any) => {
     setSelectedUser(username);
     removeFriend().then(data => {
       refreshGetMe();
