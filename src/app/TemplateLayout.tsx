@@ -5,6 +5,7 @@ import RightSidebar from "@/components/RideSideBar/RightSidebar";
 import { usePathname } from "next/navigation";
 import { useGetUsers } from "./lib/services/users.sevice";
 import { useApp } from "./lib/context/AppContext";
+import { useAuth } from "./lib/context/AuthContext";
 
 interface TemplateLayoutProps {
   children: React.ReactNode;
@@ -20,9 +21,6 @@ export default function TemplateLayout({ children }: TemplateLayoutProps) {
   const { leftDrawerStatus, rightDrawerStatus, toggleLeftDrawer, toggleRightDrawer } = useApp();
   const [isStatic, setIsStatic] = useState(false);
 
-  const { data: users, refetch: refreshGetUsers, isLoading: getUsersLoading, error } = useGetUsers();
-
-  const allUsers = users?.data;
 
 
   useEffect(() => {
@@ -62,9 +60,6 @@ export default function TemplateLayout({ children }: TemplateLayoutProps) {
 
       {/* Right Sidebar */}
       <RightSidebar
-        allUsers={allUsers}
-        allUsersLoading={getUsersLoading}
-        refreshGetUsers={refreshGetUsers}
         open={rightDrawerStatus}
         toggleDrawer={toggleRightDrawer}
         isStatic={isStatic}

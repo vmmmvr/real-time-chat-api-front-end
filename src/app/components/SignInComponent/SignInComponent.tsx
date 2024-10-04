@@ -18,7 +18,7 @@ import { useAuth } from '@/app/lib/context/AuthContext';
 
 export default function SignInComponent() {
   const [userBody, setUserBody] = useState<SignInData>({});
-  const {refreshGetMe} = useAuth();
+  const {refreshGetMe, refreshGetUsers} = useAuth();
   const {mutateAsync: signIn, data: userSignInData, isPending: loading, isError, error: userSignInError, } = useSignIn(userBody);
   // formik
   const formik = useFormik({
@@ -29,9 +29,7 @@ export default function SignInComponent() {
     validationSchema: UserSignInSchema,
     onSubmit: (values) => {
       setUserBody({...values});
-      signIn().then(data => {
-        refreshGetMe()
-      })
+      signIn().then(data => {  })
     },
   });
  // sign in data
@@ -65,10 +63,10 @@ return <Loading />
      userSignInError &&  <ErrorAlert  message={`${userSignInError}`} />
     }
  <div>
-   <Typography {...missingProperties} variant="h4" color="blue-gray">
+   <Typography  variant="h4" color="blue-gray"  placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
      Sign In
    </Typography>
-   <Typography  {...missingProperties} color="gray" className="mt-1 font-normal">
+   <Typography   color="gray" className="mt-1 font-normal" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
      Enter your details to sign in.
    </Typography>
  </div>

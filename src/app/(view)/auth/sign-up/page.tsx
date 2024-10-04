@@ -55,10 +55,10 @@ const SignUpForm = () => {
           userSignupError &&  <ErrorAlert  message={`${userSignupError}`} />
          }
       <div>
-        <Typography  {...missingProperties} variant="h4" color="blue-gray"  >
+        <Typography   variant="h4" color="blue-gray"  placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}  >
           Sign Up
         </Typography>
-        <Typography  {...missingProperties} color="gray" className="mt-1 font-normal" >
+        <Typography   color="gray" className="mt-1 font-normal"  placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} >
           Create a new account.
         </Typography>
       </div>
@@ -103,7 +103,7 @@ const SignUpForm = () => {
           <small className='text-warning'>{formik.errors.password}</small>
         </div>
       </div>
-      <Button    {...missingProperties} 
+      <Button    {...missingProperties}
         type="submit"
         className="w-full bg-primary-700 hover:bg-primary-800 text-primary-50 font-semibold py-4 px-4 rounded-md shadow-md"        >
         Sign Up

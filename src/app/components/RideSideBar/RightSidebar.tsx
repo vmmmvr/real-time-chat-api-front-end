@@ -28,13 +28,19 @@ const getIndexColor = (index: number) => {
   return Number(index) < Number(colorsList.length) ? index : Number(index) % Number(colorsList.length);
 };
 
-export default function RightSidebar({ open, toggleDrawer, isStatic, allUsers, allUsersLoading, refreshGetUsers }: { open: boolean, toggleDrawer: () => void, allUsersLoading: boolean, isStatic: boolean, allUsers: Users, refreshGetUsers: () => void }) {
+export default function RightSidebar({ open, toggleDrawer, isStatic,}: { open: boolean, toggleDrawer: () => void,  isStatic: boolean}) {
   const [selectedUser, setSelectedUser] = useState<String | undefined>("");
   const { mutateAsync: addFriend, isPending: addFriendLoading, error: addFriendError } = useAddFriend(selectedUser);
   const { mutateAsync: removeFriend, isPending: removeFriendLoading, error: removeFriendError } = useRemoveFriend(selectedUser);
 
-  const { user, refreshGetMe } = useAuth();
+  const { user, refreshGetMe,allUsers, refreshGetUsers, getUsersLoading } = useAuth();
 
+ useEffect(() => {
+   if( !user && !allUsers) (refreshGetMe(), refreshGetUsers())
+  return () => {
+  };
+ }, [user, allUsers]);
+  
 
 
   const handleAddFriend = useCallback((username?: any) => {
@@ -54,14 +60,14 @@ export default function RightSidebar({ open, toggleDrawer, isStatic, allUsers, a
   }, [removeFriend, refreshGetMe, refreshGetUsers]); // Dependencies
 
 
-  const loading = addFriendLoading || removeFriendLoading || allUsersLoading;
+  const loading = addFriendLoading || removeFriendLoading || getUsersLoading;
 
   return (
     <>
       {isStatic ? (
         <div className="p-4 bg-white shadow-md w-full  flex flex-col  max-w-[300px] rounded-e-3xl divide-y-2 divide-gray-100">
           {
-            loading ? <Loading /> : <DrawerComponent user={user} allUsers={allUsers} handleAddFriend={handleAddFriend} handleRemoveFriend={handleRemoveFriend} />
+            loading ? <Loading /> : user && <DrawerComponent user={user} allUsers={allUsers} handleAddFriend={handleAddFriend} handleRemoveFriend={handleRemoveFriend} />
           }
         </div>
       ) : (
@@ -73,7 +79,7 @@ export default function RightSidebar({ open, toggleDrawer, isStatic, allUsers, a
           size={250} placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}        >
           <div className="flex flex-col h-full">
             {
-              loading ? <Loading /> : <DrawerComponent user={user} allUsers={allUsers} handleAddFriend={handleAddFriend} handleRemoveFriend={handleRemoveFriend} />
+              loading ? <Loading /> : user && <DrawerComponent user={user} allUsers={allUsers} handleAddFriend={handleAddFriend} handleRemoveFriend={handleRemoveFriend} />
             }
           </div>
         </Drawer>
@@ -83,7 +89,7 @@ export default function RightSidebar({ open, toggleDrawer, isStatic, allUsers, a
 }
 
 
-function DrawerComponent(props: { user: User, handleRemoveFriend: (username?: String) => void, handleAddFriend: (username?: String) => void, allUsers: Users }) {
+function DrawerComponent(props: { user?: User, handleRemoveFriend: (username?: String) => void, handleAddFriend: (username?: String) => void, allUsers: Users }) {
   const router = useRouter();
 
   return (

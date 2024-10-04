@@ -102,9 +102,9 @@ const MenuComponent = () => {
     // },
   ];
   return (
-    <List className="px-0" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+    <List className="px-0"  placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} >
       {menuItems.map((item, index) => (
-        <ListItem key={index} className={`flex items-center justify-between ${pathname === item.url ? "bg-primary-main text-white " : ""} hover:text-primary-main hover:bg-primary-100 w-full  max-w-[200px] md:max-w-[300px]`} placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+        <ListItem key={index} className={`flex items-center justify-between ${pathname === item.url ? "bg-primary-main text-white " : ""} hover:text-primary-main hover:bg-primary-100 w-full  max-w-[200px] md:max-w-[300px]`}  placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} >
           <Link href={item.url} className="flex items-center gap-2 w-full">
             <item.icon size={18} className={`${pathname === item.url ? "  " : "text-primary-main"} `} />
             <span className="font-normal text-sm">{item.title}</span>
