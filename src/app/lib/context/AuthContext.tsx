@@ -44,15 +44,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     console.log({error});
-    
-    if(error !== null) {
-      const token = cookies.get("refreshToken")
+    const token = cookies.get("refreshToken")
+    if(error !== null && token) {
       refreshToken(token).then(data => {
         if(data?.data) {
           cookies.set("accessToken", data.data?.['accessToken']);
         }
       })
-      .finally(() => refreshGetMe())
+      // .finally(() => refreshGetMe())
     }
   return () => {
     
