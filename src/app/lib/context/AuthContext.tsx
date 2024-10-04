@@ -1,8 +1,9 @@
 import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
-import { useGetMe } from '../services/auth.service';
+import { useGetMe, useRefreshToken } from '../services/auth.service';
 import { redirect, usePathname } from 'next/navigation';
 import { User } from '../types/user';
+import  cookies  from 'js-cookie';
 
 interface AuthContextType {
   user: any;
@@ -26,6 +27,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const [user, setUser] = useState<User | null>(null);
   const {data: MeDate,refetch: refreshGetMe, isPending, isError, error} = useGetMe(); 
+  const {mutateAsync: refreshToken, data: refreshTokenData, isPending:refreshTokenLoading, isError:refreshTokenIsError, error: refreshTokenError} = useRefreshToken()
   const isAuthenticated = !!user;
 
   useEffect(() => {
@@ -39,7 +41,24 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       
     }
   }, [MeDate, pathname])
-  
+
+  useEffect(() => {
+    console.log({error});
+    
+    if(error !== null) {
+      const token = cookies.get("refreshToken")
+      refreshToken(token).then(data => {
+        if(data?.data) {
+          cookies.set("accessToken", data.data?.['accessToken']);
+        }
+      })
+      .finally(() => refreshGetMe())
+    }
+  return () => {
+    
+  };
+}, [error]);
+
   return (
     <AuthContext.Provider value={{ user,refreshGetMe, isAuthenticated }}>
       {children}

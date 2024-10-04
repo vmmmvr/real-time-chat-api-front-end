@@ -23,7 +23,9 @@ export default function RootLayout({
       </head>
       <body className=" w-full h-full ">
         <ReactQueryProvider>
-             <TemplateLayout>{children}</TemplateLayout>
+             <TemplateLayout>
+              {children}
+              </TemplateLayout>
         </ReactQueryProvider>
       </body>
     </html>

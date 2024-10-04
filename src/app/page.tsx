@@ -16,22 +16,22 @@ let socket: Socket<DefaultEventsMap, DefaultEventsMap>;
 export default function HomePage() {
   const { toggleLeftDrawer, toggleRightDrawer} = useApp();
 
-  useEffect(() => {
-    socket = io('http://localhost:4000', {
-      transports: ['websocket', 'polling'], // Use these transport methods
-    });
-    socket.on("connect", () => console.log("connected"))
-    // Listen for incoming messages
-    socket.on('message', (data) => {
-      // setMessages((prevMessages) => [...prevMessages, data]);
-    });
+  // useEffect(() => {
+  //   socket = io('http://localhost:4000', {
+  //     transports: ['websocket', 'polling'], // Use these transport methods
+  //   });
+  //   socket.on("connect", () => console.log("connected"))
+  //   // Listen for incoming messages
+  //   socket.on('message', (data) => {
+  //     // setMessages((prevMessages) => [...prevMessages, data]);
+  //   });
 
-    // Clean up the socket connection when the component unmounts
-    return () => {
-      socket.off('message');
-      socket.disconnect();
-    };
-  }, []);
+  //   // Clean up the socket connection when the component unmounts
+  //   return () => {
+  //     socket.off('message');
+  //     socket.disconnect();
+  //   };
+  // }, []);
 
 
 

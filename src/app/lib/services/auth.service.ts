@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { queryClient } from "../providers/ReactQueryProvider";
-import { getMe, signIn, signUp } from "../axios/axios";
+import { getMe, refreshToken, signIn, signUp } from "../axios/axios";
 import { SignInData, SignUpData } from "../types/user";
 
 export const useSignUp = (body: SignUpData) => {
@@ -22,6 +22,16 @@ export const useSignIn = (body: SignInData) => {
     },
     onSuccess: (data) => {
       queryClient.setQueryData(["signIn"], data);
+    },
+  });
+};
+
+export const useRefreshToken = () => {
+  return useMutation({
+    mutationKey: ["RefreshToken"], // Unique key for this query
+    mutationFn: async (cachedRefreshToken?: string) => {
+      const data = await refreshToken(cachedRefreshToken);
+      return data;
     },
   });
 };

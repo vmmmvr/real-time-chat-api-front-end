@@ -17,21 +17,13 @@ export default function TemplateLayout({ children }: TemplateLayoutProps) {
   const authRoutes = ["/auth/sign-in", "/auth/sign-up"];
 
   const isAuthRoute = authRoutes.includes(String(pathname));
-  const { leftDrawerStatus, rightDrawerStatus, toggleLeftDrawer, toggleRightDrawer} = useApp();
+  const { leftDrawerStatus, rightDrawerStatus, toggleLeftDrawer, toggleRightDrawer } = useApp();
   const [isStatic, setIsStatic] = useState(false);
 
-  const {data: users, refetch: refreshGetUsers, isLoading: getUsersLoading, error} = useGetUsers();
-  
-  const allUsers = users?.data;
- 
+  const { data: users, refetch: refreshGetUsers, isLoading: getUsersLoading, error } = useGetUsers();
 
-  useEffect(() => {
-    refreshGetUsers();
-    console.log({allUsers});
-  return () => {
-    
-  };
-}, []);
+  const allUsers = users?.data;
+
 
   useEffect(() => {
     const handleResize = () => {
@@ -45,7 +37,7 @@ export default function TemplateLayout({ children }: TemplateLayoutProps) {
         toggleRightDrawer();
       }
     };
-    
+
 
     handleResize(); // Check the screen size on initial load
     window.addEventListener("resize", handleResize); // Add event listener for resizing

@@ -128,6 +128,13 @@ export const getMe = async () => {
   return response.data;
 };
 
+export const refreshToken = async (refreshToken?: String) => {
+  const response = await axiosInstance.post(ALL_END_POINTS.AUTH.REFRESH_TOKEN, {
+    refreshToken,
+  });
+  return response.data;
+};
+
 export const getUsers = async () => {
   const response = await axiosInstance.get(ALL_END_POINTS.USERS.ALL_USERS);
   return response.data;
