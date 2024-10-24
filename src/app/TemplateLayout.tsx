@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { useGetUsers } from "./lib/services/users.sevice";
 import { useApp } from "./lib/context/AppContext";
 import { useAuth } from "./lib/context/AuthContext";
+import MainWrapper from "./components/Main/Main";
 
 interface TemplateLayoutProps {
   children: React.ReactNode;
@@ -47,7 +48,7 @@ export default function TemplateLayout({ children }: TemplateLayoutProps) {
 
   return (
 
-    isAuthRoute ? (<>{children}</>) : (<div className=" flex flex-col md:flex-row h-full p-10 bg-blue-gray-100 bg-opacity-50">
+    isAuthRoute ? (<>{children}</>) : (<div className=" flex flex-col md:flex-row h-full p-10 bg-blue-gray-100/50">
       {/* Left Sidebar */}
       <LeftSidebar
         open={leftDrawerStatus}
@@ -56,7 +57,7 @@ export default function TemplateLayout({ children }: TemplateLayoutProps) {
       />
 
       {/* Main Content */}
-      <main className="flex-1 h-full">{children}</main>
+      <main className="flex-1 h-full"> <MainWrapper> {children}</MainWrapper></main>
 
       {/* Right Sidebar */}
       <RightSidebar

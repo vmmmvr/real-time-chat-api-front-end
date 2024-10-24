@@ -41,9 +41,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const allUsers = users?.data;
 
   useEffect(() => {
-      if(MeDate && pathname !== "/") {
-        redirect("/");
-      }
+      // if(MeDate && pathname !== "/") {
+      //   redirect("/");
+      // }
       setUser(MeDate?.data);
   
     return () => {

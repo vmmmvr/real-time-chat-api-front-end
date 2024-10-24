@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import ErrorAlert from "./components/ErrorAlert/ErrorAlert";
 import ReactQueryProvider from "./lib/providers/ReactQueryProvider";
 import TemplateLayout from "./TemplateLayout";
 

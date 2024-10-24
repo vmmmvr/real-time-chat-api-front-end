@@ -31,7 +31,7 @@ export function middleware(request: NextRequest) {
   // If the user has an access token, they should not access public routes
   if (accessToken && isPublicPath) {
     // Redirect authenticated users away from public routes (e.g., to the dashboard)
-    return NextResponse.redirect(new URL("/", request.url)); // Redirect to the homepage or another authenticated page
+    return NextResponse.redirect(new URL("/user", request.url)); // Redirect to the homepage or another authenticated page
   }
 
   // If there's no access token and the user tries to access a protected route, redirect to sign-in

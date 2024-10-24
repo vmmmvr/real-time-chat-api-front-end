@@ -4,7 +4,7 @@
 import { useAuth } from '@/app/lib/context/AuthContext';
 import { useAddFriend, useRemoveFriend } from '@/app/lib/services/users.sevice';
 import { User, Users } from '@/app/lib/types/user';
-import { missingProperties } from '@/app/lib/utils/utils';
+import { colorsList, getIndexColor, missingProperties } from '@/app/lib/utils/utils';
 import { Drawer, Button, Typography, Spinner } from '@material-tailwind/react';
 import { useCallback, useEffect, useState } from 'react';
 import cookies from 'js-cookie';
@@ -14,19 +14,6 @@ import React from 'react';
 import Link from 'next/link';
 
 
-const colorsList = [
-  "bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500",
-  "bg-gradient-to-r from-green-400 via-teal-500 to-blue-600",
-  "bg-gradient-to-r from-yellow-400 via-orange-500 to-red-600",
-  "bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-600",
-  "bg-gradient-to-r from-pink-300 via-red-400 to-yellow-500",
-  "bg-gradient-to-r from-teal-300 via-green-400 to-lime-500",
-  "bg-gradient-to-r from-primary-200 via-primary-300 to-primary-600"
-]
-
-const getIndexColor = (index: number) => {
-  return Number(index) < Number(colorsList.length) ? index : Number(index) % Number(colorsList.length);
-};
 
 export default function RightSidebar({ open, toggleDrawer, isStatic,}: { open: boolean, toggleDrawer: () => void,  isStatic: boolean}) {
   const [selectedUser, setSelectedUser] = useState<String | undefined>("");
@@ -106,7 +93,7 @@ function DrawerComponent(props: { user?: User, handleRemoveFriend: (username?: S
                 return (
                   
                   <div key={String(friend?._id)} className='flex items-center justify-between gap-3 hover:bg-blue-gray-50 hover:rounded-lg p-2 cursor-pointer'>
-                    <div onClick={() => router.push(`/${friend?.username}`)} className='flex gap-3 items-center'>
+                    <div onClick={() => router.push(`/user/${friend?.username}`)} className='flex gap-3 items-center'>
                       <div className={`w-10 h-10 rounded-full bg-gradient-to-r ${colorsList[getIndexColor(index)]}`}></div>
                       <div className='flex flex-col'>
                         <Typography className='font-medium' {...missingProperties}>{friend.name?.slice(0, 6)}</Typography>
